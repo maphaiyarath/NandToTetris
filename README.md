@@ -1,2 +1,3 @@
-Michelle Aphaiyarath
-repository for nand to tetris
+# Michelle Aphaiyarath's
+ 
+Nand to Tetris Repo!
