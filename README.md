@@ -1,3 +1,3 @@
-# Michelle Aphaiyarath's
+# Michelle Aphaiyarath
  
-Nand to Tetris Repo!
+Nand to Tetris Repo
