@@ -13,5 +13,8 @@ CHIP Not {
     OUT out;
 
     PARTS:
-    // Put your code here:
+    Nand (a = in, b = in, out = out);
+
+    // a , b , in . out = names of wires, pins...
+    // '=' isn't assignment operator, more like soddering
 }
