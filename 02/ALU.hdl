@@ -29,18 +29,45 @@
 CHIP ALU {
     IN  
         x[16], y[16],  // 16-bit inputs        
-        zx, // zero the x input?
-        nx, // negate the x input?
-        zy, // zero the y input?
-        ny, // negate the y input?
+        zx, // zero the x input? // =====
+        nx, // negate the x input? // =====
+        zy, // zero the y input? // =====
+        ny, // negate the y input? // =====
         f,  // compute out = x + y (if 1) or x & y (if 0)
         no; // negate the out output?
 
     OUT 
         out[16], // 16-bit output
         zr, // 1 if (out == 0), 0 otherwise
-        ng; // 1 if (out < 0),  0 otherwise
+        ng; // 1 if (out < 0),  0 otherwise // =====
 
     PARTS:
-   // Put you code here:
+    // zx
+    Mux16 (a = x, b = false, sel = zx, out = zeroX);
+
+    // nx
+    Not16 (in = zeroX, out = xPrime);
+    Mux16 (a = zeroX, b = xPrime, sel = nx, out = zeroXOrNegateX);
+
+    // zy
+    Mux16 (a = y, b = false, sel = zy, out = zeroY);
+
+    // ny
+    Not16 (in = zeroY, out = yPrime);
+    Mux16 (a = zeroY, b = yPrime, sel = ny, out = zeroYOrNegateY);
+
+    // f
+    And16 (a = zeroXOrNegateX, b = zeroYOrNegateY, out = xAndY);
+    Add16 (a = zeroXOrNegateX, b = zeroYOrNegateY, out = xAddY);
+    Mux16 (a = xAndY, b = xAddY, sel = f, out = output);
+
+    // no & ng
+    Not16 (in = output, out = negateOutput);      
+    Mux16 (a = output, b = negateOutput, sel = no, out = out, out[15] = ng, out[0..7] = zr1, out[8..15] = zr2);
+
+    // zr
+    Or8Way (in = zr1, out = topHalf);
+    Or8Way (in = zr2, out = botHalf);
+    Or (a = topHalf, b = botHalf, out = checkZero);
+    Not (in = checkZero, out = zr);
 }
