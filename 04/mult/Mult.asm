@@ -23,7 +23,7 @@ M = D + M // total = total + data
 
 @R0
 M = M - 1 // decrement loop
-@LOOP     // jump back up to loop if count > 0
+@LOOP
 0; JMP
 
 (STOP)
