@@ -39,5 +39,56 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-    // Put your code here:
+    // ARegister ===========================================================================
+    Not (in = instruction[15], out = isAInstruction);
+    And (a = instruction[15], b = instruction[5], out = isCAndAIsDest);
+    Or (a = isAInstruction, b = isCAndAIsDest, out = loadA);
+    Mux16 (a = instruction, b = outFromALU, sel = instruction[15], out = outToA);
+    ARegister (in = outToA, load = loadA, out = outToPC, out[0..14] = addressM, out = AMux);
+
+    // A / M Mux ===========================================================================
+    Mux16 (a = AMux, b = inM, sel = instruction[12], out = inputAM);
+
+    // DRegister ===========================================================================
+    And (a = instruction[15], b = instruction[4], out = loadD);
+    DRegister (in = outToD, load = loadD, out = inputD);
+
+    // ALU =================================================================================    
+    ALU (x = inputD, y = inputAM, zx = instruction[11], nx = instruction[10], zy = instruction[9], ny = instruction[8], f = instruction[7], no = instruction[6], out = outM, out = outToD, out = outFromALU, zr = zero, ng = negative);
+
+    // writeM ==============================================================================
+    And (a = instruction[15], b = instruction[3], out = writeM);
+
+    // PC ==================================================================================
+    // jgt
+    Not (in = zero, out = nonzero);
+    Not (in = negative, out = nonNegative);
+    And (a = nonNegative, b = nonzero, out = positive);
+    And (a = positive, b = instruction[0], out = jgt);
+
+    // jeq
+    And (a = zero, b = instruction[1], out = jeq);
+
+    // jge
+    Or (a = jgt, b = jeq, out = jge);
+
+    // jlt
+    And (a = negative, b = instruction[2], out = jlt);
+
+    // jne
+    Not (in = zero, out = nonZero);
+    And (a = instruction[0], b = instruction[2], out = jneCondition);
+    And (a = nonZero, b = jneCondition, out = jne);
+
+    // jle
+    Or (a = jlt, b = jeq, out = jle);
+
+    // jmp
+    And (a = instruction[0], b = instruction[1], out = andZeroAndOne);
+    And (a = andZeroAndOne, b = instruction[2], out = andAll);
+    And (a = andAll, b = true, out = jmp);
+
+    Or8Way (in[0] = false, in[1] = jgt, in[2] = jeq, in[3] = jge, in[4] = jlt, in[5] = jne, in[6] = jle, in[7] = jmp, out = jump);
+    And (a = instruction[15], b = jump, out = loadToPC);
+    PC (in = outToPC, load = loadToPC, inc = true, reset = reset, out[0..14] = pc);
 }
