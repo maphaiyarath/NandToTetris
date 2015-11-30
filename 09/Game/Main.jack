@@ -7,6 +7,7 @@ class Main {
         var ImpossibleGame game;
 
         let game = ImpossibleGame.new();
+        do game.run();
         do game.dispose();
 
         return;

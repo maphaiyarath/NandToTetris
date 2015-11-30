@@ -1,7 +1,6 @@
 class Square {
 
-    field int x, y;
-    field int size;
+    field int x, y, size;
 
     constructor Square new (int xPos, int yPos, int squareSize)
     {
@@ -29,18 +28,26 @@ class Square {
 
     method void jump()
     {
+        if (y > 1) // & ((y + size) < 231))
+        {
+            do Screen.setColor (false);
+            do Screen.drawRectangle (x, (y + size) - 1, x + size, y + size);
+
+            let y = y - 2;
+            do Screen.setColor (true);
+            do Screen.drawRectangle (x, y, x + size, y + 1);
+
+            // do Sys.wait (5);
+
+            /*
+            do Screen.setColor (false);
+            do Screen.drawRectangle (x, y, x + size, y + 1);
+
+            let y = y + 2;
+            do Screen.setColor (true);
+            do Screen.drawRectangle (x, (y + size) - 10, x + size, y + size);
+            */
+        }
         return;
     }
-
-    method void moveRight()
-    {
-        do Screen.setColor (false);
-        do Screen.drawRectangle (x, y, x + 1, y + size);
-        
-        let x = x + 2;
-        do Screen.setColor (true);
-        do Screen.drawRectangle ((x + size) - 1, y, x + size, y + size);
-        return;
-    }
-
 }
