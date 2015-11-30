@@ -1,3 +1,19 @@
 class ImpossibleGame {
 
+    field Square square;
+
+    constructor ImpossibleGame new()
+    {
+        let square = Square.new (50, 200, 30);
+
+        return this;
+    }
+
+    method void dispose()
+    {
+        do square.dispose();
+        do Memory.deAlloc (this);
+        return;
+    }
+
 }

@@ -2,7 +2,12 @@ class Main {
 
     function void main() {
     	
-    	do Output.printString ("Hello world");
+    	// do Output.printString ("Hello world");
+
+        var ImpossibleGame game;
+
+        let game = ImpossibleGame.new();
+        do game.dispose();
 
         return;
     }
