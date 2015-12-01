@@ -1,0 +1,29 @@
+class Spike {
+
+    // field int x, y, size;
+
+    constructor Square new() // (int xPos, int yPos)
+    {
+        // let x = xPos;
+        // let y = yPos;
+
+        do draw();
+
+        return this;
+    }
+
+    method void dispose()
+    {
+        do Memory.deAlloc (this);
+        return;
+    }
+
+    method void draw()
+    {
+        do Screen.drawLine (400, 230, 410, 220);
+        do Screen.drawLine (410, 220, 420, 230);
+        return;
+    }
+
+
+}
