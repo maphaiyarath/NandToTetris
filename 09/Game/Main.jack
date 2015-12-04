@@ -1,10 +1,39 @@
 class Main {
+	
+	function void main() {
+		var CellGame game;
+
+		let game = CellGame.new();
+		do game.run();
+		do game.dispose();
+		
+		return;
+	}
+}
+
+/*
+class Main {
 
     function void main() {
     	
     	// do Output.printString ("Hello world");
 
         var ImpossibleGame game;
+        var int state;
+        var int start;
+        let start = 0;
+        var int play;
+        let play = 1;
+        var int pause;
+        let pause = 2;
+        var int continue;
+        let continue = 3;
+        var int over;
+        let over = 4;
+        var int restart;
+        let restart = 5;
+
+        let state = start;
 
         let game = ImpossibleGame.new();
         do game.run();
@@ -13,3 +42,4 @@ class Main {
         return;
     }
 }
+*/

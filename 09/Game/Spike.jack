@@ -1,12 +1,12 @@
+/*
 class Spike {
 
-    // field int x, y, size;
-    field int x;
+    field int x, y;
 
-    constructor Spike new (int xPos) // (int xPos, int yPos)
+    constructor Spike new (int xPos, int yPos)
     {
         let x = xPos;
-        // let y = yPos;
+        let y = yPos;
 
         do draw();
 
@@ -21,13 +21,13 @@ class Spike {
 
     method void draw()
     {
-        // let x = 100;
         do Screen.setColor (true);
-        // do Screen.drawLine (x, 200, 110, 190);
-        // do Screen.drawLine (110, 190, 120, 200);
-        do Screen.drawCircle (x, 100, 20);
+        do Screen.drawLine (x, y, x + 50, y - 50); // 400, 199, 450, 149
+        do Screen.drawLine (x + 50, y - 50, x + 100, y); // 
+        do Screen.drawCircle (x - 50, y - 70, 20);
         return;
     }
 
 
 }
+*/

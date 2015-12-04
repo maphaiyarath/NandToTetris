@@ -1,17 +1,132 @@
+class Cell {
+    field int x, y;
+    field int size;
+    field boolean alive;
+
+    constructor Cell new(int Ax, int Ay, int Asize) {
+        let x = Ax;
+        let y = Ay;
+        let size = Asize;
+        let alive = true;
+
+        do draw();
+
+        return this;
+    }
+
+    method int getX() {
+        return x;
+    }
+
+    method int getY() {
+        return y;
+    }
+
+    method int getSize() {
+        return size;
+    }
+
+    method boolean getAlive() {
+        return alive;
+    }
+
+    method void setAlive(boolean state) {
+        let alive = state;
+        return;
+    }
+
+    method void update() {
+        if (alive) {
+            do draw();
+        }
+        if (~alive) {
+            do erase();
+        }
+        return;
+    }
+
+    method void incSize(int inc) {
+        if (((y + size) < 254) & ((x + size) < 510)) {
+            do erase();
+            let size = size + inc;
+            do draw();
+        }
+        return;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void draw() {
+        do Screen.setColor(true);
+        do Screen.drawCircle(x, y, size);
+        return;
+    }
+
+    method void erase() {
+        do Screen.setColor(false);
+        do Screen.drawCircle(x, y, size);
+        return;
+    }
+
+    method void moveUp() {
+        if ((y - size) > 1) {
+            do erase();
+            let y = y - 1;
+            do draw();
+        }
+        return;
+    }
+
+    method void moveDown() {
+        if ((y + size) < 254) {
+            do erase();
+            let y = y + 1;
+            do draw();
+        }
+        return;
+    }
+
+    method void moveLeft() {
+        if ((x - size) > 1) {
+            do erase();
+            let x = x - 1;
+            do draw();
+        }
+        return;
+    }
+
+    method void moveRight() {
+        if ((x + size) < 510) {
+            do erase();
+            let x = x + 1;
+            do draw();      
+        }
+        return;
+    }
+}
+
+/*
 class Square {
 
     field int x, y, size;
+    field boolean collision;
 
     constructor Square new (int xPos, int yPos, int squareSize)
     {
         let x = xPos;
         let y = yPos;
         let size = squareSize;
+        let collision = false;
 
         do draw();
 
         return this;
     }
+
+
 
     method void dispose()
     {
@@ -24,7 +139,7 @@ class Square {
         do Screen.setColor (true);
         do Screen.drawRectangle (x, y, x + size, y + size);
 
-
+        do Screen.drawCircle (x - 50, y - 70, 20);
 
         return;
     }
@@ -63,6 +178,7 @@ class Square {
         return;
     }
 }
+*/
 
 
 
