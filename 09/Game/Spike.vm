@@ -1,0 +1,33 @@
+function Spike.new 0
+push constant 1
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push pointer 0
+call Spike.draw 1
+pop temp 0
+push pointer 0
+return
+function Spike.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Spike.draw 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push constant 100
+push constant 20
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return

@@ -23,31 +23,61 @@ class Square {
     {
         do Screen.setColor (true);
         do Screen.drawRectangle (x, y, x + size, y + size);
+
+
+
         return;
     }
 
     method void jump()
     {
-        if (y > 1) // & ((y + size) < 231))
+        if (y > 100)
         {
-            do Screen.setColor (false);
-            do Screen.drawRectangle (x, (y + size) - 1, x + size, y + size);
+        do Screen.setColor (false);
+        do Screen.drawRectangle (x, (y + size) - 1, x + size, y + size);
 
-            let y = y - 2;
-            do Screen.setColor (true);
-            do Screen.drawRectangle (x, y, x + size, y + 1);
-
-            // do Sys.wait (5);
-
-            /*
-            do Screen.setColor (false);
-            do Screen.drawRectangle (x, y, x + size, y + 1);
-
-            let y = y + 2;
-            do Screen.setColor (true);
-            do Screen.drawRectangle (x, (y + size) - 10, x + size, y + size);
-            */
+        let y = y - 1;
+        do Screen.setColor (true);
+        do Screen.drawRectangle (x, y, x + size, y + 1);
         }
+
+        /*
+        if ((y < 100) & ((y + size) < 231))
+        {
+            // let y = 100;
+            do Screen.setColor (false);
+            do Screen.drawRectangle (x, y, x + size, y + 1);
+
+            let y = y + 1;
+            do Screen.setColor (true);
+            do Screen.drawRectangle (x, (y + size) - 1, x + size, y + size);
+        }
+        */
+
+        // when jump is called,
+        // top left corner should be at default location (50, 199)
+        // should automatically start going up
+        // when it reaches a certain point,
+        // it should fall back down
+
         return;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

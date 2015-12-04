@@ -4,10 +4,13 @@ class ImpossibleGame {
     // and clear screen
 
     field Square square;
+    field Spike spike;
     field int direction;
 
     constructor ImpossibleGame new()
     {
+        // how to make random spikes ??? ////////////////////////
+        // let spike = Spike.new (100);
         let square = Square.new (50, 199, 30);
         let direction = 0;
 
@@ -19,6 +22,7 @@ class ImpossibleGame {
 
     method void dispose()
     {
+        do spike.dispose();
         do square.dispose();
         do Memory.deAlloc (this);
         return;
@@ -69,6 +73,11 @@ class ImpossibleGame {
         }
 
         do Sys.wait(5);
+        return;
+    }
+
+    method void moveSpike()
+    {
         return;
     }
 
