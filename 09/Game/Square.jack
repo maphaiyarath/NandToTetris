@@ -54,18 +54,37 @@ class Square
 
     method void jump()
     {
-        // use spdY, gravity and onGround
-        // let spdY = spdY + gravity;
-        // let y = y + spdY;
-
-        if (y > 85)
+        if (y > 85) // & ((y + size) < 229))
         {
-            do erase();
+            /*
+            let spdY = -10;
+
+            if (spdY < -5)
+            {
+                let spdY = -5;
+            }
+            */
+
+            do Screen.setColor (false);
+            do Screen.drawRectangle (x, (y + size) - 1, x + size, y + size);
 
             let y = y - 1;
 
-            do draw();
+            // let spdY = spdY + gravity;
+            // let y = y + spdY;
+
+            do Screen.setColor (true);
+            do Screen.drawRectangle(x, y, x + size, y + 1);
+            // having trouble with y...
         }
+        
+        /*
+        else
+        {
+            let y = 179;
+            let spdY = 0;
+        }
+        */
 
         // opposite to go down
 

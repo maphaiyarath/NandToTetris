@@ -49,11 +49,17 @@ class Spike
 
     method void moveLeft()
     {
-        // do erase();
+        if (x > 0)
+        {
+            // do Screen.setColor (false);
+            // do Screen.drawRectangle ((x + 60) - 1, y - 40, x + 60, y);
 
-        let x = x - 1;
+            let x = x - 1;
 
-        do draw();
+            // use spdX
+
+            do draw();
+        }
         
         return;        
     }

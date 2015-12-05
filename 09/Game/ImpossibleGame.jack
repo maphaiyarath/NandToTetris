@@ -37,22 +37,19 @@ class ImpossibleGame
 
         while ((~exit) & (~gameOver))
         {
-            do moveSpike();
-
             while (key = 0)
             {
                 let key = Keyboard.keyPressed();
                 
+                do moveSpike();
                 do moveSquare();
             }
 
-            // q = quit
             if (key = 81)
             {
                 let exit = true;
             }
 
-            // up arrow = jump
             if (key = 131)
             {
                 let direction = 1;
@@ -107,14 +104,4 @@ class ImpossibleGame
         
         return;
     }
-
-    /*
-    method void restart()
-    {
-        // do Screen.clearScreen();
-        
-        return;
-    }
-    */
-
 }
