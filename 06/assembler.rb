@@ -9,6 +9,7 @@ def is_readable?(path)
   File.readable?(path)
 end
 
+# unless = opposite of if
 unless args_valid?
   abort ("Usage: ./assembler.rb Prog.asm")
 end
@@ -20,13 +21,8 @@ unless is_readable?(asm_filename)
 end
 
 puts "The contents of #{asm_filename}"
-
-# puts "Hey, what's for lunch?"
-# answer = gets.chomp
-# p name
-# puts "Oh, #{answer}, sounds good!"
-
-
+asm_file = File.open(asm_filename)
+puts asm_file.read
 
 
 
