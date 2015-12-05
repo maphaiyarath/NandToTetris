@@ -1,6 +1,6 @@
-class Spike {
-
-    field int x, y;
+class Spike
+{
+    field int x, y, spdX;
 
     constructor Spike new (int xPos, int yPos)
     {
@@ -15,17 +15,58 @@ class Spike {
     method void dispose()
     {
         do Memory.deAlloc (this);
+        
         return;
+    }
+
+    method int getX()
+    {
+        return x;
+    }
+
+    // anywhere on line
+
+    method int getY()
+    {
+        return y;
     }
 
     method void draw()
     {
-        do Screen.setColor (true);
-        do Screen.drawLine (x, y, x + 50, y - 50); // 400, 199, 450, 149
-        do Screen.drawLine (x + 50, y - 50, x + 100, y); // 
-        do Screen.drawCircle (x - 50, y - 70, 20);
+        do Screen.drawLine (x, y, x + 30, y - 40);
+        do Screen.drawLine (x + 30, y - 40, x + 60, y);
+        
         return;
     }
 
+    method void erase()
+    {
+        do Screen.setColor (false);
+        do Screen.drawRectangle (x, y - 40, x + 60, y);
+        
+        return;
+    }
 
+    method void moveLeft()
+    {
+        // do erase();
+
+        let x = x - 1;
+
+        do draw();
+        
+        return;        
+    }
 }
+
+/*
+if (x > 1) {
+    do Screen.setColor(false);
+    // do Screen.drawLine (x + 29, y, x + 30, y - 40);
+    // do Screen.drawLine (x + 59, y - 40, x + 60, y);
+    let x = x - 2;
+    // do Screen.setColor(true);
+    // do Screen.drawLine (x, y, x + 31, y - 40);
+    // do Screen.drawLine (x + 30, y - 40, x + 61, y);
+}
+*/

@@ -1,10 +1,9 @@
 class Main {
 
     function void main() {
-    	
-    	// do Output.printString ("Hello world");
-
-        var ImpossibleGame game;
+    	var ImpossibleGame game;
+        
+        /*
         var int state;
         var int start;
         let start = 0;
@@ -18,8 +17,8 @@ class Main {
         let over = 4;
         var int restart;
         let restart = 5;
-
         let state = start;
+        */
 
         let game = ImpossibleGame.new();
         do game.run();
@@ -27,4 +26,5 @@ class Main {
 
         return;
     }
+
 }

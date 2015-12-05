@@ -1,14 +1,20 @@
 function ImpossibleGame.new 0
-push constant 3
+push constant 4
 call Memory.alloc 1
 pop pointer 0
-push constant 50
-push constant 199
-push constant 30
-call Square.new 3
+push constant 402
+push constant 229
+call Spike.new 2
 pop this 0
+push constant 50
+push constant 179
+push constant 50
+call Square.new 3
+pop this 1
 push constant 0
 pop this 2
+push constant 0
+pop this 3
 push constant 25
 push constant 230
 push constant 487
@@ -20,10 +26,10 @@ return
 function ImpossibleGame.dispose 0
 push argument 0
 pop pointer 0
-push this 1
+push this 0
 call Spike.dispose 1
 pop temp 0
-push this 0
+push this 1
 call Square.dispose 1
 pop temp 0
 push pointer 0
@@ -39,8 +45,14 @@ pop local 1
 label WHILE_EXP0
 push local 1
 not
+push this 3
+not
+and
 not
 if-goto WHILE_END0
+push pointer 0
+call ImpossibleGame.moveSpike 1
+pop temp 0
 label WHILE_EXP1
 push local 0
 push constant 0
@@ -82,25 +94,89 @@ not
 if-goto WHILE_END2
 call Keyboard.keyPressed 0
 pop local 0
-push pointer 0
-call ImpossibleGame.moveSquare 1
-pop temp 0
 goto WHILE_EXP2
 label WHILE_END2
 goto WHILE_EXP0
 label WHILE_END0
+push this 3
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+call Screen.clearScreen 0
+pop temp 0
+push constant 250
+push constant 128
+call Output.moveCursor 2
+pop temp 0
+push constant 12
+call String.new 1
+push constant 84
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 121
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 103
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+label IF_FALSE2
+push constant 0
+return
+function ImpossibleGame.collision 0
+push argument 0
+pop pointer 0
+push argument 1
+call Square.getX 1
+push argument 2
+call Spike.getX 1
+eq
+push argument 1
+call Square.getY 1
+push argument 2
+call Spike.getY 1
+eq
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+pop this 3
+label IF_FALSE0
 push constant 0
 return
 function ImpossibleGame.moveSquare 0
 push argument 0
 pop pointer 0
+push pointer 0
+push this 1
+push this 0
+call ImpossibleGame.collision 3
+pop temp 0
 push this 2
 push constant 1
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push this 0
+push this 1
 call Square.jump 1
 pop temp 0
 label IF_FALSE0
@@ -112,10 +188,8 @@ return
 function ImpossibleGame.moveSpike 0
 push argument 0
 pop pointer 0
-push constant 0
-return
-function ImpossibleGame.restart 0
-push argument 0
-pop pointer 0
+push this 0
+call Spike.moveLeft 1
+pop temp 0
 push constant 0
 return
