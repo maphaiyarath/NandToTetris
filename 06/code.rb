@@ -60,7 +60,7 @@ class Code
 		COMP[mnenomic]
 	end
 
-	def jump
-		JUMP[mnenomic]
+	def jump(mnemonic)
+		JUMP[mnemonic]
 	end
 end
