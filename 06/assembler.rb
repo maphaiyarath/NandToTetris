@@ -3,7 +3,6 @@
 require_relative 'parser'
 
 class Assembler
-
   def initialize(asm_file, hack_file)
     @asm_file = asm_file
     @hack_file = hack_file
@@ -20,10 +19,7 @@ class Assembler
     lines.delete("")
     return lines
   end
-
 end
-
-
 
 def args_valid?()
   ARGV[0] && ARGV[0].end_with?(".asm") && ARGV.length == 1
@@ -55,9 +51,3 @@ File.open(asm_filename) do |asm_file|
     assembler.assemble!
   end
 end
-
-
-
-
-
-
