@@ -30,18 +30,19 @@ class Parser
 
 	def assemble_c_command(instruction)
 		# c-instruction is an assignment or a jump
+		@bits = instruction.split('=', ';')
 		# always starts with '111'
 		command = "111"
 		# if it's an assignment, it'll have '='
 		if instruction.include? '='
 			# append comp (2nd element in array), dest (1st element) & no jump (000)
-			@bits = instruction.split('=')
+			# @bits = instruction.split('=')
 			command << @code.comp(@bits[1])
 			command << @code.dest(@bits[0])
 			command << '000'
 		# or it's a jump, in which case, it'll include a ';'
 		else instruction.include? ';'
-			@bits = instruction.split(';')
+			# @bits = instruction.split(';')
 			command << @code.comp(@bits[0])
 			command << '000'
 			command << @code.jump(@bits[1])
