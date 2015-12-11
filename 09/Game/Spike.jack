@@ -6,16 +6,14 @@ class Spike
     {
         let x = xPos;
         let y = yPos;
-
+        let spdX = 1;
         do draw();
-
         return this;
     }
 
     method void dispose()
     {
         do Memory.deAlloc (this);
-        
         return;
     }
 
@@ -35,15 +33,15 @@ class Spike
     {
         do Screen.drawLine (x, y, x + 30, y - 40);
         do Screen.drawLine (x + 30, y - 40, x + 60, y);
-        
         return;
     }
 
     method void erase()
     {
+        // need to figure out how to erase trail
+
         do Screen.setColor (false);
         do Screen.drawRectangle (x, y - 40, x + 60, y);
-        
         return;
     }
 
@@ -54,13 +52,9 @@ class Spike
             // do Screen.setColor (false);
             // do Screen.drawRectangle ((x + 60) - 1, y - 40, x + 60, y);
 
-            let x = x - 1;
-
-            // use spdX
-
+            let x = x - spdX;
             do draw();
         }
-        
         return;        
     }
 }

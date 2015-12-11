@@ -1,21 +1,34 @@
 class ImpossibleGame
 {
-    // eventually use array for random spikes?
     field Spike spike;
-
     field Square square;
     field int direction;
     field boolean gameOver;
 
+    /*
+        var int state;
+        var int start;
+        var int play;
+        let play = 1;
+        var int pause;
+        let pause = 2;
+        var int continue;
+        let continue = 3;
+        var int over;
+        let over = 4;
+        var int restart;
+        let restart = 5;
+        let start = 0;
+        let state = start;
+    */
+
     constructor ImpossibleGame new()
     {
         let spike = Spike.new (402, 229);
-        let square = Square.new (50, 179, 50);
+        let square = Square.new (80, 179, 50);
         let direction = 0;
         let gameOver = false;
-
         do Screen.drawLine (25, 230, 487, 230); // ground
-        
         return this;
     }
 
@@ -24,7 +37,6 @@ class ImpossibleGame
         do spike.dispose();
         do square.dispose();
         do Memory.deAlloc (this);
-        
         return;
     }
 
@@ -32,17 +44,21 @@ class ImpossibleGame
     {
         var char key;
         var boolean exit;
-
         let exit = false;
 
         while ((~exit) & (~gameOver))
         {
+            // do square.draw();
+
             while (key = 0)
             {
                 let key = Keyboard.keyPressed();
-                
                 do moveSpike();
                 do moveSquare();
+                do square.draw();
+
+                //do Output.moveCursor (100, 100);
+                //do Output.printString (square.getX());
             }
 
             if (key = 81)
@@ -64,23 +80,20 @@ class ImpossibleGame
         if (gameOver)
         {
             do Screen.clearScreen();
-            do Output.moveCursor (250, 128);
+            do Output.moveCursor (0, 0);
             do Output.printString ("Try again...");
-
-            // restart and print "attempt: "...
         }
-
         return;
     }
 
     method void collision (Square sq, Spike sp)
     {
-        // if bottom/right of square touches anywhere on spike => gameOver
+        // if bottom or right of square touches anywhere on spike => gameOver
+
         if ((sq.getX() = sp.getX()) & (sq.getY() = sp.getY()))
         {
             let gameOver = true;
         }
-
         return;
     }
 
@@ -92,16 +105,15 @@ class ImpossibleGame
         {
             do square.jump();
         }
+        do square.move();
 
         do Sys.wait(5);
-
         return;
     }
 
     method void moveSpike()
     {
         do spike.moveLeft();
-        
         return;
     }
 }

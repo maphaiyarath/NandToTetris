@@ -1,26 +1,23 @@
 class Square
 {
-    field int x, y, size, spdY, gravity;
+    field int x, y, size, spdY, gravity, py;
     field boolean onGround;
 
     constructor Square new (int xPos, int yPos, int squareSize)
     {
         let x = xPos;
         let y = yPos;
+        let py = y;
         let size = squareSize;
         let spdY = 0;
-        let gravity = 1/2;
+        let gravity = 1;
         let onGround = true;
-
-        do draw();
-
         return this;
     }
 
     method void dispose()
     {
         do Memory.deAlloc (this);
-        
         return;
     }
 
@@ -38,9 +35,13 @@ class Square
 
     method void draw()
     {
-        do Screen.setColor (true);
+        do Screen.setColor(false);
+        //do Screen.drawRectangle(x, y+size, x + size, py + size);
+        do Screen.drawRectangle(x, py, x + size, py + size);
+
+        do Screen.setColor(true);
+        //do Screen.drawRectangle(x, y, x + size, py+size);
         do Screen.drawRectangle (x, y, x + size, y + size);
-        
         return;
     }
 
@@ -48,61 +49,26 @@ class Square
     {
         do Screen.setColor (false);
         do Screen.drawRectangle (x, y, x + size, y + size);
-        
+        return;
+    }
+
+    method void move() {
+        let py = y;
+        let y = y + spdY;
+        if (y < 80) {
+            let y = 80;
+        }
+        if (y + size > 230) {
+            let y = 230 - size;
+        }
+        let spdY = spdY + gravity;
         return;
     }
 
     method void jump()
     {
-        if (y > 85) // & ((y + size) < 229))
-        {
-            /*
-            let spdY = -10;
-
-            if (spdY < -5)
-            {
-                let spdY = -5;
-            }
-            */
-
-            do Screen.setColor (false);
-            do Screen.drawRectangle (x, (y + size) - 1, x + size, y + size);
-
-            let y = y - 1;
-
-            // let spdY = spdY + gravity;
-            // let y = y + spdY;
-
-            do Screen.setColor (true);
-            do Screen.drawRectangle(x, y, x + size, y + 1);
-            // having trouble with y...
-        }
-        
-        /*
-        else
-        {
-            let y = 179;
-            let spdY = 0;
-        }
-        */
-
-        // opposite to go down
+       let spdY = -5;
 
         return;
     }
 }
-
-/*
-function startJump {
-    if (~onGround) {
-        spdY = -2;
-        onGround = true; } }
-function endJump {
-    if (spdY < -6)
-        { spdY = -8; } }
-*/
-
-// when jump is called,
-// should start moving up screen
-// when it reaches a certain point,
-// it should fall back down to ground
