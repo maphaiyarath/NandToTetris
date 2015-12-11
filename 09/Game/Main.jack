@@ -3,7 +3,7 @@ class Main {
     function void main() {
     	var ImpossibleGame game;
         let game = ImpossibleGame.new();
-        do game.run();
+        do game.begin();
         do game.dispose();
         return;
     }

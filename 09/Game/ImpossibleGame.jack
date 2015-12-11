@@ -4,10 +4,10 @@ class ImpossibleGame
     field Square square;
     field int direction;
     field boolean gameOver;
+    field int state;
+    field int start;
 
     /*
-        var int state;
-        var int start;
         var int play;
         let play = 1;
         var int pause;
@@ -25,10 +25,12 @@ class ImpossibleGame
     constructor ImpossibleGame new()
     {
         let spike = Spike.new (402, 229);
-        let square = Square.new (80, 179, 50);
+        let square = Square.new (80, 178, 50);
         let direction = 0;
         let gameOver = false;
-        do Screen.drawLine (25, 230, 487, 230); // ground
+        let start = 0;
+        let state = start;
+        
         return this;
     }
 
@@ -40,22 +42,51 @@ class ImpossibleGame
         return;
     }
 
+    method void begin()
+    {
+        var char key;
+        do Screen.clearScreen();
+        do Output.moveCursor (0, 0);
+        do Output.printString ("The Impossible Game");
+        do Output.println();
+        do Output.printString ("Press the right arrow to start!");
+        do Screen.drawLine (25, 230, 487, 230); // ground
+
+        while (key = 0)
+        {
+            let key = Keyboard.keyPressed();
+            do square.draw();
+        }
+
+        if (key = 132)
+        {
+            do run();
+        }
+
+        while (~(key = 0))
+        {
+            let key = Keyboard.keyPressed();
+        }
+        
+        return;
+    }
+
     method void run()
     {
         var char key;
         var boolean exit;
         let exit = false;
+        do Screen.clearScreen();
 
         while ((~exit) & (~gameOver))
         {
-            // do square.draw();
-
             while (key = 0)
             {
                 let key = Keyboard.keyPressed();
                 do moveSpike();
                 do moveSquare();
                 do square.draw();
+                do Screen.drawLine (25, 230, 487, 230); // ground
 
                 //do Output.moveCursor (100, 100);
                 //do Output.printString (square.getX());

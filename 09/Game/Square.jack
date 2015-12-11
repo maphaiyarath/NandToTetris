@@ -67,7 +67,7 @@ class Square
 
     method void jump()
     {
-       let spdY = -5;
+        let spdY = -5;
 
         return;
     }
